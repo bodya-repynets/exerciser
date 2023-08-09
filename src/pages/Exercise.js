@@ -38,7 +38,7 @@ const Exercise = () => {
           borderRadius: "20px",
           overflow: "hidden",
           flexDirection: { 'xs': "column", 'md': "row" },
-          width: { 'xs': "80vw",'sm': '50vw', 'md': "80vw" },
+          width: { 'xs': "300px",'sm': '500px', 'md': "800px" },
         }}
       >
         <Box sx={{width: { 'xs': "100%", 'md': "50%" }}}>
