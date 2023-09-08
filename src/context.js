@@ -23,57 +23,50 @@ const AppContext = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeExercises, setActiveExercises] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [pageNum, setPageNum] = useState(0)
-  const [danger, setDanger] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  
-  
+  const [pageNum, setPageNum] = useState(0);
+  const [danger, setDanger] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSearch = () => {
-    if(searchValue!==''){
-
-    fetchByName(setExercises, searchValue);
-    }else{
+    if (searchValue !== "") {
+      fetchByName(setExercises, searchValue);
+    } else {
       setDanger(true);
-      setTimeout(()=>{
-        setDanger(false)
-      }, 2000)
+      setTimeout(() => {
+        setDanger(false);
+      }, 2000);
     }
   };
   const handleSelect = () => {
-    if(bodyPart!==''){
-    fetchByBodyPart(setExercises, bodyPart);
-    }else{
-      setDanger(true)
-      setTimeout(()=>{
-        setDanger(false)
-      }, 2000)
+    if (bodyPart !== "") {
+      fetchByBodyPart(setExercises, bodyPart);
+    } else {
+      setDanger(true);
+      setTimeout(() => {
+        setDanger(false);
+      }, 2000);
     }
   };
 
   useEffect(() => {
-    
-      const localExercises = JSON.parse(localStorage.getItem("exercises"));
-      const localCategories=JSON.parse(localStorage.getItem("categories"))
-      if (localExercises&&localCategories) {
-        setExercises(localExercises)
-        setCategories(localCategories)
-      }else{
-        fetchBodyParts(setCategories);
-        fetchAllExercises(setExercises);
-      }  
-  }, []);
-  useEffect(()=>{
-    if(exercises.length>0){
-    const num = Math.ceil(exercises.length / 12);
-    const lastItem = currentPage * 12;
-    const firstItem = lastItem - 12;
-    const newExercises=exercises.slice(firstItem, lastItem)
-    setActiveExercises(newExercises)
-    setPageNum(num)
+    const localCategories = JSON.parse(localStorage.getItem("categories"));
+    if (localCategories) {
+      setCategories(localCategories);
+    } else {
+      fetchBodyParts(setCategories);
     }
-  }, [currentPage, exercises])
+    fetchAllExercises(setExercises);
+  }, []);
+  useEffect(() => {
+    if (exercises.length > 0) {
+      const num = Math.ceil(exercises.length / 12);
+      const lastItem = currentPage * 12;
+      const firstItem = lastItem - 12;
+      const newExercises = exercises.slice(firstItem, lastItem);
+      setActiveExercises(newExercises);
+      setPageNum(num);
+    }
+  }, [currentPage, exercises]);
 
   return (
     <GlobalContext.Provider
@@ -92,7 +85,7 @@ const AppContext = () => {
         setActiveExercises,
         pageNum,
         danger,
-        success
+        success,
       }}
     >
       <ThemeProvider theme={theme}>

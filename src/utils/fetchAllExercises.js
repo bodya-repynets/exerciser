@@ -14,7 +14,6 @@ export default async (setExercises) => {
     try {
         const response = await axios.request(options);
         console.log('fetching all exercises');
-        localStorage.setItem("exercises", JSON.stringify(response.data));
         setExercises(response.data);
     } catch (error) {
         console.error(error);

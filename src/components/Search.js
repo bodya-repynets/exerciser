@@ -7,7 +7,7 @@ const Search = () => {
   return (
     <Stack
       sx={{
-        width: "50%",
+        width: { xs: "100%", sm: "50%" },
       }}
       spacing={"20px"}
       alignItems={"center"}
@@ -18,7 +18,7 @@ const Search = () => {
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <Button
-        sx={{ height: "44px", width: "40%" }}
+        sx={{ height: "44px", width: "40%", paddingX: "20px" }}
         variant="contained"
         onClick={handleSearch}
       >
